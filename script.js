@@ -65,25 +65,6 @@ app.post('/submitted', async (req, res) => {
     res.send('Get Data Successfully!! Marks: ' + marks);
 });
 
-app.get('/ans', async (req, res) => {
-    const { email, task } = req.query;
-    const queryObj = {};
-
-    if (email) {
-        queryObj.email = email;
-    }
-
-    if (task) {
-        queryObj.task = { $regex: task, $options: 'i' };
-    }
-
-    try {
-        const val = await Answer.find(queryObj);
-        res.send(val);
-    } catch (error) {
-        res.status(500).send("Error fetching answers");
-    }
-});
 
 const port = 3000;
 app.listen(port, () => {

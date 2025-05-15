@@ -1,6 +1,9 @@
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const uri = "mongodb+srv://Himanshu_Bisht:4ecCOaZ6fyVNsxNY@himanshuapi.hoxoq28.mongodb.net/HimanshuAPI?retryWrites=true&w=majority&appName=HimanshuAPI"
+
+const uri = process.env.Monngo_URI
 
 const connectDB = () =>{
     return mongoose.connect(uri)
