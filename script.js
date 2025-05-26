@@ -1,12 +1,20 @@
 import express from 'express';
 import cors from 'cors';
 import dayjs from 'dayjs';
+import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
 import connectDB from './db/server.js';
 import Answer from './models/answers.js';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Extend dayjs with the plugins
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+const TIMEZONE = "Asia/Kolkata"; 
 
 // Connect once when the server starts
 connectDB()
@@ -27,7 +35,7 @@ const Ans5 = ["12"];
 // No need to deleteMany here!
 const saveResult = async (email, marks) => {
     try {
-        const formattedDate = dayjs().format("DD MMM YYYY, hh:mm A");
+        const formattedDate = dayjs().tz(TIMEZONE).format("DD MMM YYYY, hh:mm A");
 
         const newResult = new Answer({ email, Marks: marks,  submittedAt: formattedDate });
         await newResult.save();

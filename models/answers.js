@@ -5,7 +5,7 @@ const resultSchema = new mongoose.Schema({
     Marks : Number,
    submittedAt: {
         type: String,
-        default: () => dayjs().format("DD MMM YYYY, hh:mm A")
+        default: () => dayjs().tz(TIMEZONE).format("DD MMM YYYY, hh:mm A")
     }
 })
 
